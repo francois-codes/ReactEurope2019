@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OzX-qt-5AM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="w5F-ST-7en">
+            <objects>
+                <tabBarController id="OzX-qt-5AM" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ySE-hw-cay">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="1ID-WQ-Jab" kind="relationship" relationship="viewControllers" id="xt5-7G-hhf"/>
+                        <segue destination="Zxl-oT-9tX" kind="relationship" relationship="viewControllers" id="dzq-vN-Y48"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cv3-ZK-Ynw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-356" y="-351"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="OfQ-E9-w6Y">
+            <objects>
+                <viewController id="1ID-WQ-Jab" customClass="GreenAppViewController" customModule="MultiPackageReactNative" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CcD-1s-bMu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Odw-6I-sRb">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Cool App" id="6hT-Ak-sGv">
+                                        <barButtonItem key="rightBarButtonItem" title="click me !" id="Bnh-eH-oxV">
+                                            <connections>
+                                                <segue destination="bCo-Zd-sBi" kind="presentation" id="1R0-E5-cCm"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Il-SE-Fsy">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="akE-OF-avG"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="vQ5-5Z-cAi"/>
+                    <connections>
+                        <outlet property="reactContainerView" destination="3Il-SE-Fsy" id="x3d-KX-yco"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tiF-Ku-xhJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="456.80000000000001" y="-659.82008995502258"/>
+        </scene>
+        <!--Modal View Controller-->
+        <scene sceneID="vjM-i3-d4Y">
+            <objects>
+                <viewController id="bCo-Zd-sBi" customClass="ModalViewController" customModule="MultiPackageReactNative" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rJ7-wk-3xt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W4t-Mf-3qw">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="modal" id="VP0-Ar-xjz">
+                                        <barButtonItem key="rightBarButtonItem" title="close" id="gg4-Ho-rQn">
+                                            <connections>
+                                                <action selector="dismissModal:" destination="bCo-Zd-sBi" id="Ttq-TP-D4G"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oj6-Iy-HHq">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="oj6-Iy-HHq" firstAttribute="leading" secondItem="ert-I5-wDZ" secondAttribute="leading" id="4m8-iM-fgF"/>
+                            <constraint firstItem="oj6-Iy-HHq" firstAttribute="bottom" secondItem="ert-I5-wDZ" secondAttribute="bottom" id="AKa-12-BMR"/>
+                            <constraint firstItem="oj6-Iy-HHq" firstAttribute="top" secondItem="W4t-Mf-3qw" secondAttribute="bottom" id="B1a-wv-2t7"/>
+                            <constraint firstItem="oj6-Iy-HHq" firstAttribute="trailing" secondItem="ert-I5-wDZ" secondAttribute="trailing" id="BLK-V3-Tzb"/>
+                            <constraint firstItem="W4t-Mf-3qw" firstAttribute="leading" secondItem="rJ7-wk-3xt" secondAttribute="leading" id="HS3-kI-jIj"/>
+                            <constraint firstAttribute="trailing" secondItem="W4t-Mf-3qw" secondAttribute="trailing" id="NWk-DD-mlG"/>
+                            <constraint firstItem="oj6-Iy-HHq" firstAttribute="bottom" secondItem="ert-I5-wDZ" secondAttribute="bottom" id="WQ8-7Q-bBg"/>
+                            <constraint firstItem="oj6-Iy-HHq" firstAttribute="top" secondItem="W4t-Mf-3qw" secondAttribute="bottom" id="XJN-54-JFa"/>
+                            <constraint firstItem="W4t-Mf-3qw" firstAttribute="trailing" secondItem="oj6-Iy-HHq" secondAttribute="trailing" id="g7u-q0-gPk"/>
+                            <constraint firstItem="W4t-Mf-3qw" firstAttribute="top" secondItem="ert-I5-wDZ" secondAttribute="top" id="u4g-Pq-dU7"/>
+                            <constraint firstItem="W4t-Mf-3qw" firstAttribute="leading" secondItem="oj6-Iy-HHq" secondAttribute="leading" id="yT1-8l-bB9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ert-I5-wDZ"/>
+                    </view>
+                    <connections>
+                        <outlet property="reactContainerView" destination="oj6-Iy-HHq" id="BkO-A2-fkQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u51-Fs-g1y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1232.8" y="-865.81709145427294"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="vdB-4G-PTy">
+            <objects>
+                <viewController id="Zxl-oT-9tX" customClass="RedAppViewController" customModule="MultiPackageReactNative" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Uc3-5r-nGc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="WXo-c5-wgk"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Vx7-N4-Hu5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gsF-6I-8yX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="457" y="-7"/>
+        </scene>
+    </scenes>
+</document>

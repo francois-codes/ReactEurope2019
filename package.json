@@ -1,0 +1,25 @@
+{
+  "name": "multi-package-react-native",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "react-native start",
+    "pod:update": "cd ios && pod update",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "aggregate:bundles": "node ./packages/react-bundle-aggregator/index.js prepare -d $PWD -y -w"
+  },
+  "dependencies": {
+    "green-app": "^1.0.0",
+    "modal-app": "^1.0.0",
+    "react": "^16.7.0",
+    "react-native": "^0.57.8",
+    "red-app": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-preset-expo": "^5.0.0",
+    "react-bundle-aggregator": "^1.0.0"
+  },
+  "private": true
+}

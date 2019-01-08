@@ -1,0 +1,19 @@
+{
+  "name": "react-bundle-aggregator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "react-bundle-aggregator": "node index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cli-task-runner": "1.0.4-rc.0",
+    "ramda": "^0.26.1"
+  }
+}

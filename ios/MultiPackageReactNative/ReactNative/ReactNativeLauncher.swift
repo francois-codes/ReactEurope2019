@@ -9,16 +9,19 @@
 import UIKit
 import React
 
+/// ReactNativeLauncher class - creates a RCTRootView and attaches it to any parent
 class ReactNativeLauncher {
     
     var moduleName: String
     var initialProperties: [AnyHashable: Any]?
     
+    /// Creates a launcher for the specified module name and initial props
     init(moduleName: String, initialProperties: [AnyHashable: Any]?) {
         self.moduleName = moduleName
         self.initialProperties = initialProperties
     }
     
+    /// Mounts the app by appending it to the provided parent view
     func mountReactApp(parentView: UIView) {
         
         guard let reactRootView = RCTRootView(

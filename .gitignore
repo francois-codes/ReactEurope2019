@@ -8,3 +8,29 @@ npm-debug.*
 Pods
 
 ios/build
+
+.gradle
+local.properties
+build/
+captures/
+library/
+
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Intellij project files
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Java class files
+*.class
+
+# Exclude OS X folder attributes
+.DS_Store
+

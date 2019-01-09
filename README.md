@@ -4,7 +4,25 @@ This is a draft proposal for ReactConf, illustrating the tooling & workflow for 
 
 ## About this Repo
 
-// coming soon
+At [Applicaster](https://applicaster.com) we are building a platform which enables easy release & management of native mobile apps on iOS and Android, as well as a few TV platforms. As such, React-Native revealed itself as a very interesting option, especially with the promise of write once, run everywhere.
+
+Our apps are typically based on three things :
+
+- a layout configured in our Zapp CMS. This provides the main UI configuration for the app : screens, navigations, content for each component in each screen...
+- a SDK which leverages the layout configuration to create an app for a given platform
+- a series of plugins - some of them built in-house, others built by external developers - to provide the app with more features, or replace some built-in features of the SDK.
+
+We started using React-Native two years ago, mainly for creating plugins providing full screen experiences : a program guide page, a social feed, a live screen with an inline video player and a channel switcher...
+So not only we had to integrate React-Native in a _brown field_ context since we already had native apps that we wanted to build upon, but we also had to design a stable and scalable infrascture for mounting arbitrary react-native bundles as separated plugins.
+
+We started out by publishing to a server individual React-Native bundles for each plugin, and then downloading & mounting those bundles individually.
+Several issues arose from this :
+
+- Each bundle included the react-native js library code. Even a simple hello world react-native app will weight at least 1MB
+- It required to force a version of react-native at the SDK level to ensuire the native side & js code where all running on the same React-Native version. Updating was a problem as it would require all plugins to be updated
+- Versioning of the react native bundles needed to be handled separately.
+
+We then figured we could counter all these issues by refering to React-Native plugins as plain npm packages, and add tooling to automatically wrap, bundle and expose those individual React-Native packages to the native side. This is the mechanism that this repo illustrates, and which we would like to talk about at ReactConf. It can be valuable in any _brown field_ React Native integration, as it would allow to separately work on all the React Native parts independently, yet still provide a reliable, simple and effective tooling to mount arbitrary React-Native views anywhere in the app.
 
 ## Set up
 

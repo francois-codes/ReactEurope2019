@@ -41,7 +41,15 @@ the android project is not set up currently
 1. clone this repo
 2. run `yarn` to install dependencies
 3. run `yarn pod:update` to install pods
-4. run `yarn ios` to run on the simulator
+
+### How to run the app
+
+On iOS, simply run `yarn ios` to run on the simulator.
+On Android, you need to do the following :
+
+- run `yarn start` to start the RN packager
+- run `adb reverse TCP:8081 TCP:8081` to proxy the RN packager port to the emulator or device
+- open android studio and start the app on the emulator / device.
 
 ### How does it work
 
@@ -49,6 +57,10 @@ At the root of the workspace, you have a file called `reactModules.json`. In thi
 
 Once you've added the react bundles you want to use, simply run `yarn aggregate:bundles`.
 This script will make sure all the packages defined in `reactModules.json` are installed, and generate an index.js file which imports & registers all these modules. For each module with a standard `npm-package-name`, it will generate a moduleName like `NpmPackageName`
+
+run `yarn start` to start the React Native packager
+
+#### iOS
 
 Now open the ios project in `ios/MultiPackageReactNative.xcworkspace`. There, you can add controllers and whatever you want in the storyboard. If you want to place a view with a specific RN component, simply add the following in your controller :
 
@@ -89,3 +101,40 @@ In time, we can work to make these part of open source libraries so this can be 
 that's it !
 
 enjoy :)
+
+#### Android
+
+on android, before running `yarn start` to start the react native packager, you need to make sure you proxy the TCP port to the emulator or device with adb
+`adb reverse TCP:8081 TCP:8081`
+
+Android's implementation is inspired from [Airbnb's Native Navigation](https://github.com/airbnb/native-navigation).
+It is not maintained anymore, but it's a very nice starting point for what we want to do. Have a look [here](https://www.youtube.com/watch?v=tWitQoPgs8w) for an explanatory video of what they did
+
+The basic idea is to rely on an activity which extends the `ReactAwareActivity`, and contains a FrameLayout with a given `container` id. In this container, we can use the `ReactNativePresenter` class to present a React Native fragment
+
+```java
+
+public class MainActivity extends ReactAwareActivity {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_main);
+    FrameLayout container = findViewById(R.id.container);
+
+    ReactNativePresenter reactNativePresenter = new ReactNativePresenter(this, container);
+    reactNativePresenter.presentScreen(reactModuleName(), reactProps());
+  }
+
+  private String reactModuleName() {
+    return "GreenApp"; // this must match what is declare on the js side in AppRegistry.registerComponent call
+  }
+
+  private Bundle reactProps() {
+    Bundle bundle = new Bundle();
+    bundle.putString("foo", "bar");
+    return bundle;
+  }
+}
+
+```

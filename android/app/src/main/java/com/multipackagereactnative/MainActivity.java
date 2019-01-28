@@ -1,23 +1,33 @@
 package com.multipackagereactnative;
 
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.multipackagereactnative.ReactNative.ReactNativeActivity;
-import com.multipackagereactnative.ReactNative.ReactNativeManager;
+import com.multipackagereactnative.ReactNative.ReactAwareActivity;
+import com.multipackagereactnative.ReactNative.ReactNativePresenter;
 
-public class MainActivity extends ReactNativeActivity implements ReactNativeManager.ReactInfoProvider {
+public class MainActivity extends ReactAwareActivity implements BlankFragment.OnFragmentInteractionListener {
 
     private final int OVERLAY_PERMISSION_REQ_CODE = 1;
 
     private String TAG = "MainActivity";
 
-    private TextView mTextMessage;
+    private String GREEN_APP = "GreenApp";
+    private String RED_APP = "RedApp";
+    private String NATIVE_SCREEN = "Native Screen";
 
-    private String reactModuleName = "GreenApp";
+    private ReactNativePresenter reactNativePresenter;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -26,15 +36,18 @@ public class MainActivity extends ReactNativeActivity implements ReactNativeMana
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    reactModuleName = "GreenApp";
+                    getSupportActionBar().setTitle(GREEN_APP);
+                    reactNativePresenter.presentScreen(GREEN_APP, greenAppProps());
+
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    reactModuleName = "RedApp";
+                    getSupportActionBar().setTitle(RED_APP);
+                    reactNativePresenter.presentScreen(RED_APP, redAppProps());
+
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    getSupportActionBar().setTitle(NATIVE_SCREEN);
+                    presentNativeFragment();
                     return true;
             }
             return false;
@@ -45,38 +58,53 @@ public class MainActivity extends ReactNativeActivity implements ReactNativeMana
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
+        getSupportActionBar().setTitle(GREEN_APP);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        FrameLayout container = findViewById(R.id.content);
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        reactNativePresenter = new ReactNativePresenter(this, container);
+        reactNativePresenter.presentScreen("GreenApp", greenAppProps());
+
     }
+
+    private Bundle redAppProps() {
+        Bundle bundle = new Bundle();
+        bundle.putString("foo", "bar");
+        return bundle;
+    }
+
+    private Bundle greenAppProps() {
+        Bundle bundle = new Bundle();
+        bundle.putInt("baz", 42);
+
+        return bundle;
+    }
+
+    private void presentNativeFragment() {
+        BlankFragment frag = BlankFragment.newInstance("this is a native fragment with just a text view for now");
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        FrameLayout container = findViewById(R.id.content);
+        Fragment currentFragment = fm.findFragmentById(container.getId());
+
+        if (currentFragment != null) {
+            ft.detach(currentFragment);
+        }
+
+        ft.add(container.getId(), frag).commit();
+        fm.executePendingTransactions();
+
+    }
+
 
     @Override
-    public String reactModuleName() {
-        return reactModuleName;
-    }
+    public void onFragmentInteraction(Uri uri) {
 
-    @Override
-    public Bundle reactInitialProps() {
-        return getReactInitialProps();
-    }
-
-    private Bundle getReactInitialProps() {
-        Bundle map = new Bundle();
-        map.putString("foo", "bar");
-
-        return map;
     }
 }
-
-//public class MainActivity extends ReactActivity {
-//
-//    /**
-//     * Returns the name of the main component registered from JavaScript.
-//     * This is used to schedule rendering of the component.
-//     */
-//    @Override
-//    protected String getMainComponentName() {
-//        return "MultiPackageReactNative";
-//    }
-//}

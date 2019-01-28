@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.multipackagereactnative.ReactNative.ReactNativeFragmentViewGroup
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ViewStub
+        android:id="@+id/react_root_view_stub"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout="@layout/react_root_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</com.multipackagereactnative.ReactNative.ReactNativeFragmentViewGroup>

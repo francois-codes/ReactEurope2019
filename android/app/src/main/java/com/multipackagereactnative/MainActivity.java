@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.multipackagereactnative.ReactNative.ReactAwareActivity;
 import com.multipackagereactnative.ReactNative.ReactNativePresenter;
+import com.multipackagereactnative.ReactNative.Utils.BundleBuilder;
 
 public class MainActivity extends ReactAwareActivity implements BlankFragment.OnFragmentInteractionListener {
 
@@ -74,16 +75,15 @@ public class MainActivity extends ReactAwareActivity implements BlankFragment.On
     }
 
     private Bundle redAppProps() {
-        Bundle bundle = new Bundle();
-        bundle.putString("foo", "bar");
-        return bundle;
+        return new BundleBuilder()
+                .putString("foo", "bar")
+                .toBundle();
     }
 
     private Bundle greenAppProps() {
-        Bundle bundle = new Bundle();
-        bundle.putInt("baz", 42);
-
-        return bundle;
+        return new BundleBuilder()
+                .putInt("baz", 42)
+                .toBundle();
     }
 
     private void presentNativeFragment() {

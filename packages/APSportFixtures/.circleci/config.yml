@@ -1,0 +1,76 @@
+defaults: &defaults
+  working_directory: ~/APSportFixtures-RN
+  docker:
+    - image: applicaster/zapp-node:0.4
+
+persisted_folders: &persisted_folders
+  root: ~/
+  paths:
+    - APSportFixtures-RN/*
+
+version: 2
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          keys:
+            - v1-APSportFixtures-RN-{{ .Branch }}-{{ .Revision }}
+            - v1-APSportFixtures-RN-{{ .Branch }}-
+            - v1-APSportFixtures-RN-
+
+      - checkout
+
+      - save_cache:
+          key: v1-APSportFixtures-RN-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - .git
+
+      - run:
+          name: NPM Login
+          command: npx npm-shell-login
+
+      - restore_cache:
+          keys:
+            - v1-npm-{{ checksum "package-lock.json" }}
+
+      - run:
+          name: Install npm dependencies
+          command: npm install
+
+      - save_cache:
+          key: v1-npm-{{  checksum "package-lock.json" }}
+          paths:
+            - node_modules
+
+      - run:
+          name: Linting
+          command: npm run lint
+
+      - run:
+          name: Test coverage
+          command: npm run test -- --coverage
+
+      - persist_to_workspace:
+          root: ~/APSportFixtures-RN
+          <<: *persisted_folders
+
+      - run:
+          name: Install python tools
+          command: sudo apt-get install python-setuptools python-dev
+
+      - run:
+          name: Install pip
+          command: sudo easy_install pip
+
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+
+      - run:
+          name: Create temp folders
+          command: mkdir -p tmp/build/ios && mkdir -p tmp/build/android
+
+      - deploy:
+          name: S3 Bundle deployment
+          command: bash .circleci/deploy.sh ${CIRCLE_BRANCH}

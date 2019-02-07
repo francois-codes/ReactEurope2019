@@ -1,0 +1,76 @@
+{
+  "name": "@applicaster/APSportTopScorers-RN",
+  "version": "0.0.1",
+  "description": "React-Native Component displaying top scorers",
+  "main": "export.js",
+  "engine": {
+    "node": "8.9.0",
+    "npm": "5.5.1"
+  },
+  "scripts": {
+    "test": "jest",
+    "jest": "jest",
+    "lint": "eslint .",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "build": "npm run build:ios && bpm run build:android",
+    "build:ios": "react-native bundle --platform ios --dev false --entry-file index.ios.js --bundle-output tmp/build/ios/index.ios.bundle.js --assets-dest assets/img/",
+    "build:android": "react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output tmp/build/android/index.android.bundle.js --assets-dest assets/img/",
+    "build:staging": "npm run build:ios && bpm run build:android",
+    "build:staging:ios": "react-native bundle --platform ios --dev true --entry-file index.ios.js --bundle-output tmp/build/ios/index.ios.bundle.js --assets-dest assets/img/",
+    "build:staging:android": "react-native bundle --platform android --dev true --entry-file index.android.js --bundle-output tmp/build/android/index.android.bundle.js --assets-dest assets/img/",
+    "deploy": "npm run deploy:ios && npm run deploy:android",
+    "deploy:ios": "npm run build:ios && aws s3 sync tmp/build/ios s3://assets-production.applicaster.com/zapp/react-native-bundles/APSportTopScorers-RN/0_50_4/ios --region us-east-1 --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers",
+    "deploy:android": "npm run build:android && aws s3 sync tmp/build/android s3://assets-production.applicaster.com/zapp/react-native-bundles/APSportTopScorers-RN/0_50_4/android --region us-east-1 --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers",
+    "deploy:staging": "npm run deploy:staging:ios && npm run deploy:staging:android",
+    "deploy:staging:ios": "npm run build:staging:ios && aws s3 sync tmp/build/ios s3://assets-development.applicaster.com/zapp/react-native-bundles/APSportTopScorers-RN/0_50_4/ios --region us-east-1 --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers",
+    "deploy:staging:android": "npm run build:staging:android && aws s3 sync tmp/build/android s3://assets-development.applicaster.com/zapp/react-native-bundles/APSportTopScorers-RN/0_50_4/android --region us-east-1 --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers",
+    "storybook": "storybook start -p 7007"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/applicaster/APSportTopScorers-RN"
+  },
+  "author": "Applicaster",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/applicaster/APSportTopScorers-RN/issues"
+  },
+  "homepage": "https://github.com/applicaster/APSportTopScorers-RN#readme",
+  "dependencies": {
+    "@applicaster/london-rn-components": "1.9.1",
+    "axios": "^0.17.1",
+    "moment": "^2.20.1",
+    "ramda": "^0.25.0",
+    "react-native-zapp-bridge": "^2.7.2",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^21.2.0",
+    "babel-preset-react-native": "^2.1.0",
+    "babel-register": "^6.18.0",
+    "eslint": "^4.11.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-babel": "^4.0.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "eslint-plugin-react-native": "^2.3.2",
+    "jest": "^21.2.1",
+    "jest-cli": "^21.2.1",
+    "react-dom": "16.3.1",
+    "react-test-renderer": "^16.1.0",
+    "@storybook/react-native": "^3.4.8",
+    "@storybook/addon-actions": "^3.4.8",
+    "@storybook/addon-links": "^3.4.8",
+    "@storybook/addons": "^3.4.8"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-native": "^0.50.4"
+  },
+  "jest": {
+    "verbose": true,
+    "preset": "react-native"
+  }
+}

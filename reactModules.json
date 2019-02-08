@@ -1,5 +1,1 @@
-[
-  { "package": "red-app", "version": "^1.0.0" },
-  { "package": "green-app", "version": "^1.0.0" },
-  { "package": "modal-app", "version": "^1.0.0" }
-]
+[]

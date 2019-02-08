@@ -41,7 +41,7 @@
     "axios": "^0.17.1",
     "moment": "^2.20.1",
     "ramda": "^0.25.0",
-    "react-native-zapp-bridge": "^2.7.2",
+    "react-native-zapp-bridge": "2.7.3",
     "url": "^0.11.0"
   },
   "devDependencies": {

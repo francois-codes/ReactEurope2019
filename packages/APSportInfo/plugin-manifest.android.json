@@ -1,0 +1,38 @@
+{
+  "api": {
+    "require_startup_execution": false,
+    "class_name": "com.applicaster.reactnative.plugins.APReactNativeAdapter",
+    "react_packages": []
+  },
+  "dependency_repository_url": [],
+  "platform": "android",
+  "author_name": "Ritchie Comley",
+  "author_email": "r.comley@applicaster.com",
+  "manifest_version": "0.1.0",
+  "name": "Info-fullscreen",
+  "description": "React Native plugin for displaying info about a player or team",
+  "type": "general",
+  "identifier": "Info-fullscreen",
+  "whitelisted_account_ids": ["59784f3d2a141d000d587f77"],
+  "min_zapp_sdk": "5.5.0",
+  "deprecated_since_zapp_sdk": "",
+  "unsupported_since_zapp_sdk": "",
+  "react_native": true,
+  "react_bundle_url": "https://assets-production.applicaster.com/zapp/react-native-bundles/APSportInfo-RN/0_50_4/android/index.android.bundle.js",
+  "extra_dependencies": [],
+  "npm_dependencies": [],
+  "project_dependencies": [],
+  "custom_configuration_fields": [
+    {
+      "type": "text",
+      "key": "backgroundViewColor",
+      "tooltip_text": "Background color when the view is loading"
+    },
+    {
+      "key": "presentation",
+      "type": "text",
+      "tooltip_text": "How we should present this plugin? Possible values: present, push, presentNoNavigation, pushNoNavigation, asAChild"
+    }
+  ],
+  "ui_builder_support": true
+}

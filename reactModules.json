@@ -1,5 +1,9 @@
 [
-  { "package": "red-app", "version": "^1.0.0" },
+  {
+    "package": "red-app",
+    "moduleName": "arbitrary-module-name",
+    "version": "^1.0.0"
+  },
   { "package": "green-app", "version": "^1.0.0" },
   { "package": "modal-app", "version": "^1.0.0" }
 ]

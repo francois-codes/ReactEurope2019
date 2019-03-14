@@ -30,7 +30,10 @@ async function run(config) {
   const templatePath = resolve(__dirname, "index.js.ejs");
   const filePath = resolve(directory, "index.js");
   const data = {
-    reactModules: R.map(assignModuleName, reactModules)
+    reactModules: R.map(
+      R.unless(R.has("moduleName"), assignModuleName),
+      reactModules
+    )
   };
 
   try {

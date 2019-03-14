@@ -8,7 +8,9 @@
     "pod:update": "cd ios && pod update",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "aggregate:bundles": "node ./packages/react-bundle-aggregator/index.js prepare -d $PWD -y -w"
+    "aggregate:bundles": "node ./packages/react-bundle-aggregator/index.js prepare -d $PWD -y -w",
+    "build:ios": "mkdir -p build && node_modules/.bin/react-native bundle --platform ios --dev false --entry-file index.js --bundle-output android/build/index.android.bundle.js",
+    "build:android": "mkdir -p build && node_modules/.bin/react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/build/index.android.bundle.js"
   },
   "dependencies": {
     "green-app": "^1.0.0",

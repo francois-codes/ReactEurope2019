@@ -56,9 +56,11 @@ On Android, you need to do the following :
 At the root of the workspace, you have a file called `reactModules.json`. In this file, simply list the names of the npm packages and the versions you want to use. Currently it shows only packages inside the workspace, but it will also work with react native components defined outside of this repo. The only requirement is that the package uses a default export and not a named export.
 
 Once you've added the react bundles you want to use, simply run `yarn aggregate:bundles`.
-This script will make sure all the packages defined in `reactModules.json` are installed, and generate an index.js file which imports & registers all these modules. For each module with a standard `npm-package-name`, it will generate a moduleName like `NpmPackageName`
+This script will make sure all the packages defined in `reactModules.json` are installed, and generate an index.js file which imports & registers all these modules. For each module with a standard `npm-package-name`, it will generate a moduleName like `NpmPackageName`. You can override this automatically assigned package name by providing a specific `moduleName` property in `reactModules.json`
 
-run `yarn start` to start the React Native packager
+run `yarn start` to start the React Native packager.
+
+if you want to build the bundle for iOS or android, you can use the build commands `yarn build:ios` or `yarn build:android`
 
 #### iOS
 

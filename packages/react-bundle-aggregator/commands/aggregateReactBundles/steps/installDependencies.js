@@ -14,7 +14,8 @@ async function run(config) {
       R.compose(
         R.concat(" "),
         R.join("@"),
-        R.values
+        R.values,
+        R.omit(["moduleName"])
       )
     )
   )(reactModules);

@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import React from "react";
+import { StyleSheet, View, Text, Button } from "react-native";
 
 const INITIAL_COUNTER_VALUE = 0;
 
@@ -13,7 +13,7 @@ export default class GreenApp extends React.Component {
     this.state = {
       counter: this.props.initialCounterValue || INITIAL_COUNTER_VALUE,
       intervalId: 0,
-      currentCount: 0,
+      currentCount: 0
     };
 
     // react weirdness. Remember JS is not OP, it's prototype based. don't be fooled by the `class keyword`
@@ -31,7 +31,7 @@ export default class GreenApp extends React.Component {
   // utility component method. since we don't pass it as props, no need to bind in constructor
   updateCounterState(value) {
     this.setState(previousState => ({
-      counter: previousState.counter + value,
+      counter: previousState.counter + value
     }));
   }
 
@@ -40,14 +40,14 @@ export default class GreenApp extends React.Component {
     this.updateCounterState(value);
   }
 
-  decrement(value = -1) {
-    this.updateCounterState(value);
+  decrement(value = 1) {
+    this.updateCounterState(-value);
   }
 
   reset() {
-    this.updateCounterState(
-      this.props.initialCounterValue || INITIAL_COUNTER_VALUE,
-    );
+    this.setState({
+      counter: this.props.initialCounterValue || INITIAL_COUNTER_VALUE
+    });
   }
 
   stringifiedProps = () => {
@@ -66,29 +66,25 @@ export default class GreenApp extends React.Component {
 
   updateTimerState = () => {
     this.setState(previousState => ({
-      currentCount: previousState.currentCount + 1,
+      currentCount: previousState.currentCount + 1
     }));
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text styles={styles.text}>
-          counter value: {this.state.currentCount}
-        </Text>
         <Text style={styles.text}>I'm the green App :o</Text>
         <Text style={styles.text}>
           I received these props from the native side {this.stringifiedProps()}
         </Text>
         {/* here we render the counter's value */}
         <Text styles={styles.text}>counter value: {this.state.counter}</Text>
-        {/* and here we're showing the buttons (using React Native's built-in Button component) */}
-        <Button onPress={() => this.increment(2)} title="increment by 2" />
-        <Button onPress={() => this.decrement(2)} title="decrement by 2" />
         {/* a glimpse of React's functional power. Yes, you can render by mapping an array of strings */}
-        {['increment', 'decrement', 'reset'].map((action, key) => (
-          <Button onPress={() => this[action](1)} title={action} key={key} />
-        ))}
+        <View style={styles.buttonContainer}>
+          {["increment", "decrement", "reset"].map((action, key) => (
+            <Button onPress={() => this[action](1)} title={action} key={key} />
+          ))}
+        </View>
       </View>
     );
   }
@@ -97,11 +93,18 @@ export default class GreenApp extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'green',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "green",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  buttonContainer: {
+    justifyContent: "center"
+  },
+  button: {
+    margin: 6
   },
   text: {
-    color: 'white',
-  },
+    margin: 12,
+    color: "white"
+  }
 });

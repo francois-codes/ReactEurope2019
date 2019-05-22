@@ -1,7 +1,6 @@
 [
   {
     "package": "red-app",
-    "moduleName": "arbitrary-module-name",
     "version": "^1.0.0"
   },
   { "package": "green-app", "version": "^1.0.0" },

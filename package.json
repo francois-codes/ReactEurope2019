@@ -15,6 +15,7 @@
   "dependencies": {
     "green-app": "^1.0.0",
     "modal-app": "^1.0.0",
+    "ramda": "^0.26.1",
     "react": "^16.7.0",
     "react-native": "^0.57.8",
     "red-app": "^1.0.0"

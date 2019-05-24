@@ -1,7 +1,5 @@
 # Multi Package React Native app
 
-This is a draft proposal for ReactConf, illustrating the tooling & workflow for having a native app using several independant react-native packages bundled together in the same app.
-
 ## About this Repo
 
 At [Applicaster](https://applicaster.com) we are building a platform which enables easy release & management of native mobile apps on iOS and Android, as well as a few TV platforms. As such, React-Native revealed itself as a very interesting option, especially with the promise of write once, run everywhere.
@@ -28,13 +26,11 @@ We then figured we could counter all these issues by refering to React-Native pl
 
 ### requirements
 
-- ruby 2.4.4
-- cocopaods
+- ruby + cocopaods
 - node 8.12
 - yarn >= 1.6.0
 - Xcode 10
-
-the android project is not set up currently
+- Android studio 3.2
 
 ### Set up
 
@@ -55,12 +51,14 @@ On Android, you need to do the following :
 
 At the root of the workspace, you have a file called `reactModules.json`. In this file, simply list the names of the npm packages and the versions you want to use. Currently it shows only packages inside the workspace, but it will also work with react native components defined outside of this repo. The only requirement is that the package uses a default export and not a named export.
 
-Once you've added the react bundles you want to use, simply run `yarn aggregate:bundles`.
+Once you've added the react bundles you want to use, simply run `yarn aggregate:bundles`. you can find the code for this script in `packages/react_bundle_aggregator`
 This script will make sure all the packages defined in `reactModules.json` are installed, and generate an index.js file which imports & registers all these modules. For each module with a standard `npm-package-name`, it will generate a moduleName like `NpmPackageName`. You can override this automatically assigned package name by providing a specific `moduleName` property in `reactModules.json`
 
 run `yarn start` to start the React Native packager.
 
-if you want to build the bundle for iOS or android, you can use the build commands `yarn build:ios` or `yarn build:android`
+if you want to build the bundle for iOS or android, you can use the build commands `yarn build:ios` or `yarn build:android`.
+
+We plan to make proper libraries to easily use this in any ios / android app. Stay tune for more !
 
 #### iOS
 

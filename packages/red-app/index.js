@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import Circle from "../shared/circle";
 
 export default class RedApp extends React.Component {
   stringifiedProps = () => {
